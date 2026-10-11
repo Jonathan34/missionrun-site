@@ -7,7 +7,24 @@
 <meta name="description" content="missionrun runs Claude Code, Codex CLI and Gemini CLI on your Mac as a crew that works your backlog in missions, each agent in its own sandbox, and asks before anything reaches your branches or other people. Coming soon, open source under Apache-2.0.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b7a6e'/%3E%3Ctext x='16' y='22.5' font-family='system-ui,sans-serif' font-size='20' font-weight='700' text-anchor='middle' fill='%23fff'%3Em%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="favicon-64.png">
+<link rel="canonical" href="https://jonathan34.github.io/missionrun-site/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="missionrun">
+<meta property="og:title" content="missionrun: delegate your backlog to a crew of coding agents">
+<meta property="og:description" content="A crew of Claude Code, Codex CLI and Gemini CLI agents works your backlog on your Mac, each in its own sandbox, behind gates you control. Coming soon, open source under Apache-2.0.">
+<meta property="og:url" content="https://jonathan34.github.io/missionrun-site/">
+<meta property="og:image" content="https://jonathan34.github.io/missionrun-site/og.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="The missionrun mark, an m circled by an orbit with three agent nodes, beside the name and the line: delegate a project to a team of coding agents, behind gates you control.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="missionrun: delegate your backlog to a crew of coding agents">
+<meta name="twitter:description" content="A crew of coding agents works your backlog on your Mac, each in its own sandbox, behind gates you control. Coming soon, open source under Apache-2.0.">
+<meta name="twitter:image" content="https://jonathan34.github.io/missionrun-site/og.png">
+<meta name="twitter:image:alt" content="The missionrun mark beside the name and the line: delegate a project to a team of coding agents, behind gates you control.">
 <style>
   /* Colour values are copied from the app's design tokens (src/design-system/tokens.css). */
   :root {
@@ -52,7 +69,7 @@
   header.top { border-bottom: 1px solid var(--border); background: var(--surface); }
   header.top .wrap { display:flex; align-items:center; justify-content:space-between; gap:8px 16px; min-height:60px; flex-wrap:wrap; padding-top:8px; padding-bottom:8px; }
   .brand { display:flex; align-items:center; gap:10px; font-weight:700; font-size:18px; color:var(--text); text-decoration:none; letter-spacing:-0.01em; }
-  .mark { display:inline-grid; place-items:center; width:32px; height:32px; border-radius:8px; background:var(--accent); color:var(--accent-contrast); font-weight:700; font-size:19px; line-height:1; padding-bottom:3px; flex:none; }
+  .mark { display:block; width:32px; height:32px; flex:none; }
   nav ul { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:4px 18px; font-size:15px; }
   nav a { color: var(--text-muted); text-decoration:none; }
   nav a:hover { color: var(--text); text-decoration: underline; }
@@ -70,11 +87,12 @@
 
   /* Hero */
   .hero { padding: 72px 0 64px; }
-  .hero .wrap { display:grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items:center; }
+  .hero .wrap { display:grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .hero-text { max-width: 760px; }
   .hero h1 { font-size: clamp(44px, 7vw, 64px); letter-spacing:-0.035em; margin-bottom: 12px; display:flex; align-items:center; gap:16px; }
-  .hero h1 .mark { width:56px; height:56px; font-size:34px; border-radius:14px; padding-bottom:5px; }
+  .hero h1 .mark { width:56px; height:56px; }
   .tagline { font-size: clamp(20px, 2.4vw, 24px); line-height:1.35; margin: 0 0 16px; font-weight:600; }
-  .intro { color: var(--text-muted); font-size: 17px; max-width: 540px; }
+  .intro { color: var(--text-muted); font-size: 17px; max-width: 680px; }
   .soon { display:inline-flex; align-items:center; gap:8px; margin-top:12px; padding:7px 14px; border-radius:999px; border:1px solid var(--border-strong); background:var(--card-bg); font-size:14px; font-weight:600; }
   .soon::before { content:""; width:8px; height:8px; border-radius:50%; background: var(--waiting); }
 
@@ -153,29 +171,15 @@
     .cap-static { visibility: visible; }
   }
 
-  /* Mock UI cards (illustrations) */
-  .mocks { display:grid; grid-template-columns: 1.15fr 1fr; gap: 16px; align-items:start; }
-  .mock { background: var(--card-bg); border:1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; box-shadow: var(--shadow-card); font-size: 14px; line-height: 1.55; }
-  .mock-head { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom: 12px; }
-  .chan { font-size: 13px; color: var(--text-muted); font-weight:600; }
-  .msg { display:grid; grid-template-columns: 28px 1fr; gap: 10px; }
-  .msg + .msg { margin-top: 14px; }
-  .avatar { width:28px; height:28px; border-radius:50%; display:grid; place-items:center; color:var(--role-text); font-weight:700; font-size:12px; }
-  .avatar.r { background:var(--role-r); } .avatar.v { background:var(--role-v); }
-  .who { font-weight: 600; } .who small { color: var(--text-muted); font-weight: 400; font-size: 12px; margin-left: 6px; }
-  .msg p { margin: 2px 0 0; }
-  .approval { border-color: var(--waiting); }
-  .approval .k { font-size: 12px; font-weight: 700; color: var(--waiting); text-transform: uppercase; letter-spacing:.05em; }
-  .approval h3 { font-size: 16px; margin: 0 0 6px; }
-  .approval ul { margin: 6px 0 12px; padding-left: 18px; color: var(--text-muted); }
-  .btns { display:flex; flex-wrap:wrap; gap: 8px; justify-content:flex-end; }
-  .btn { display:inline-flex; align-items:center; min-height: 34px; padding: 0 12px; border-radius: 4px; border:1px solid var(--border-strong); background: var(--surface); font-weight: 500; font-size: 14px; }
-  .btn.danger { color: var(--error); border-color: var(--error); }
-  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-contrast); font-weight: 600; }
-  .strip { display:flex; flex-wrap:wrap; align-items:center; gap: 8px 14px; background: var(--accent-bg); border:1px solid var(--accent); border-radius: var(--radius-lg); padding: 10px 14px; font-size: 14px; margin-bottom: 16px; }
-  .strip .count { background: var(--accent); color: var(--accent-contrast); border-radius:999px; min-width: 24px; height: 24px; display:inline-grid; place-items:center; font-weight:700; font-size:13px; padding: 0 7px; }
-  .strip .what { flex: 1 1 260px; }
-  .strip .open { font-weight: 600; color: var(--accent-strong); }
+  /* Screenshots */
+  .shot { margin: 0; min-width: 0; }
+  .shot img { display:block; width:100%; height:auto; border-radius: var(--radius-lg); border:1px solid var(--border); box-shadow: 0 8px 28px rgb(0 0 0 / 12%); background: var(--surface); }
+  .hero .shot img { border-radius: var(--radius-xl); box-shadow: 0 18px 50px rgb(0 0 0 / 16%); }
+  .shot figcaption { margin-top: 10px; font-size: 15px; color: var(--text-muted); }
+  .shot figcaption strong { display:block; color: var(--text); font-size: 16px; }
+  .gallery { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
+  .how-flow { margin-top: 32px; max-width: 760px; }
+  .how-flow h3 { font-size: 20px; }
   .note { margin-top: 16px; font-size: 15px; color: var(--text-muted); }
 
   /* Architecture */
@@ -212,21 +216,21 @@
 
   footer.bottom { padding: 32px 0 48px; color: var(--text-muted); font-size: 14px; }
   footer.bottom .wrap { display:flex; flex-wrap:wrap; gap: 8px 24px; justify-content:space-between; align-items:center; }
-  footer .mark { width:22px; height:22px; font-size:13px; border-radius:6px; padding-bottom:2px; vertical-align:middle; margin-right:8px; }
+  footer .mark { display:inline-block; width:22px; height:22px; vertical-align:middle; margin-right:8px; }
 
   @media (max-width: 980px) {
     ol.steps { grid-template-columns: repeat(2, 1fr); }
     ol.steps li:last-child { grid-column: 1 / -1; }
   }
   @media (max-width: 880px) {
-    .hero .wrap, .mocks, .autonomy { grid-template-columns: 1fr; }
+    .autonomy { grid-template-columns: 1fr; }
     .g3 { grid-template-columns: 1fr 1fr; }
     .arch-list { columns: 1; }
   }
   @media (max-width: 600px) {
     section { padding: 48px 0; }
     .hero { padding: 40px 0 48px; }
-    .g3, ol.steps { grid-template-columns: 1fr; }
+    .g3, ol.steps, .gallery { grid-template-columns: 1fr; }
     nav ul { gap: 2px 14px; font-size: 14px; }
     .mode { grid-template-columns: 1fr; gap: 4px; }
     .flow { padding: 14px 10px; }
@@ -242,7 +246,7 @@
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="./"><span class="mark" aria-hidden="true">m</span>missionrun</a>
+    <a class="brand" href="./"><img class="mark" src="favicon.svg" width="32" height="32" alt="">missionrun</a>
     <nav aria-label="Sections">
       <ul>
         <li><a href="#problem">Problem</a></li>
@@ -261,33 +265,19 @@
   <!-- Hero -->
   <section class="hero" aria-labelledby="title">
     <div class="wrap">
-      <div>
-        <h1 id="title"><span class="mark" aria-hidden="true">m</span>missionrun</h1>
+      <div class="hero-text">
+        <h1 id="title"><img class="mark" src="favicon.svg" width="56" height="56" alt="">missionrun</h1>
         <p class="tagline">Delegate your backlog to a crew of AI coding agents, behind gates you control.</p>
         <p class="intro">Point missionrun at a repository and say what you want done. A crew of roles (a researcher, an engineer, a reviewer) works through it in missions, on your Mac, with the Claude Code, Codex or Gemini CLI you already pay for. Each agent session runs in its own sandbox, and nothing reaches your branches or other people until you approve it.</p>
         <p class="soon">Coming soon · open source, Apache-2.0</p>
       </div>
 
-      <figure class="figure">
-        <div class="flow" role="img" aria-label="Illustration: a work item, fix the crash when a recipe has no photo, moves from the researcher to the engineer to the reviewer, waits at an Approve gate for you, then is merged.">
-          <div class="flow-head" aria-hidden="true"><span>Work item · bug fixing mission</span><span class="label-ill">Illustration</span></div>
-          <div class="track" aria-hidden="true">
-            <div class="item"><span>Fix crash: recipe with no photo</span></div>
-            <div class="lane r"><span class="av">Re</span>Researcher</div>
-            <div class="lane e"><span class="av">En</span>Engineer</div>
-            <div class="lane v"><span class="av">Rv</span>Reviewer</div>
-            <div class="lane g"><span class="av">?</span>Approve</div>
-            <div class="lane m"><span class="av">✓</span>Merged</div>
-          </div>
-          <div class="flow-foot" aria-hidden="true">
-            <span class="cap cap1">The researcher reads the issue and finds the cause.</span>
-            <span class="cap cap2">The engineer makes the change in the run's own worktree.</span>
-            <span class="cap cap3">The reviewer checks the change and runs the tests.</span>
-            <span class="cap cap4">It waits for you: nothing lands until you approve.</span>
-            <span class="cap cap5">Approved, so missionrun merges it into your branch.</span>
-            <span class="cap-static">Each role did its part, you approved at the gate, and the change was merged.</span>
-          </div>
-        </div>
+      <figure class="shot">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="screens/home-map-dark.png">
+          <img src="screens/home-map-light.png" width="1440" height="900" fetchpriority="high"
+               alt="The missionrun Home screen as a map: you at the centre, linked to eleven projects such as Recipe box, Trail notes and Ledger tidy. Projects with work waiting on you carry an amber count, their missions branch out to the work items that wait, and a sidebar lists every project and its mission channels. The header reads 7 working, $12.71 today, 1 paused.">
+        </picture>
       </figure>
     </div>
   </section>
@@ -400,79 +390,74 @@
           <div class="mode"><dt>Always on</dt><dd>Reading your repository and editing the run's own copy of it happen inside the sandbox, with no switch.</dd></div>
         </dl>
       </div>
+
+      <figure class="figure how-flow">
+        <figcaption><h3>One work item through the crew</h3></figcaption>
+        <div class="flow" role="img" aria-label="Illustration: a work item, fix the crash when a recipe has no photo, moves from the researcher to the engineer to the reviewer, waits at an Approve gate for you, then is merged.">
+          <div class="flow-head" aria-hidden="true"><span>Work item · bug fixing mission</span><span class="label-ill">Illustration</span></div>
+          <div class="track" aria-hidden="true">
+            <div class="item"><span>Fix crash: recipe with no photo</span></div>
+            <div class="lane r"><span class="av">Re</span>Researcher</div>
+            <div class="lane e"><span class="av">En</span>Engineer</div>
+            <div class="lane v"><span class="av">Rv</span>Reviewer</div>
+            <div class="lane g"><span class="av">?</span>Approve</div>
+            <div class="lane m"><span class="av">✓</span>Merged</div>
+          </div>
+          <div class="flow-foot" aria-hidden="true">
+            <span class="cap cap1">The researcher reads the issue and finds the cause.</span>
+            <span class="cap cap2">The engineer makes the change in the run's own worktree.</span>
+            <span class="cap cap3">The reviewer checks the change and runs the tests.</span>
+            <span class="cap cap4">It waits for you: nothing lands until you approve.</span>
+            <span class="cap cap5">Approved, so missionrun merges it into your branch.</span>
+            <span class="cap-static">Each role did its part, you approved at the gate, and the change was merged.</span>
+          </div>
+        </div>
+      </figure>
     </div>
   </section>
 
-  <!-- Product visuals (illustrations until the first release) -->
+  <!-- Product screenshots -->
   <section id="look" aria-labelledby="look-h">
     <div class="wrap">
       <span class="eyebrow">A look inside</span>
       <h2 id="look-h">One channel per mission, one place to decide</h2>
       <p class="lede">Roles report in the first person in their mission's channel. What waits on you is pinned at the top, and every decision opens in words.</p>
 
-      <div class="strip" role="group" aria-label="Illustration of the Waiting on you strip">
-        <span class="label-ill">Illustration</span>
-        <strong>Waiting on you</strong>
-        <span class="count">2</span>
-        <span class="what">Approve output: fix the crash when a recipe has no photo · Answer: which Node.js version should the setup guide name?</span>
-        <span class="open">Open</span>
-      </div>
-
-      <div class="mocks">
-        <div class="mock" role="group" aria-label="Illustration of a mission channel">
-          <div class="mock-head">
-            <span class="chan"># bug-fixing · Fix the crash when a recipe has no photo</span>
-            <span class="label-ill">Illustration</span>
-          </div>
-          <div class="msg">
-            <span class="avatar r" aria-hidden="true">Re</span>
-            <div><span class="who">Researcher<small>Claude Code · 10:42</small></span>
-              <p>I read issue #42 and traced the crash to the image loader: it assumes every recipe has a photo. The fix is a guard and a placeholder, plus a test for a recipe without one. Handing over to the engineer.</p></div>
-          </div>
-          <div class="msg">
-            <span class="avatar v" aria-hidden="true">Rv</span>
-            <div><span class="who">Reviewer<small>Codex CLI · 11:05</small></span>
-              <p>I checked the change and ran the tests: 2 files changed, 1 test added, all passing. It's ready for your approval.</p></div>
-          </div>
-        </div>
-
-        <div class="mock approval" role="group" aria-label="Illustration of an approval card">
-          <div class="mock-head">
-            <span class="k">Waiting on you · Approve output</span>
-            <span class="label-ill">Illustration</span>
-          </div>
-          <h3>Fix the crash when a recipe has no photo</h3>
-          <ul>
-            <li>2 files changed, 1 test added</li>
-            <li>Checked by the reviewer; tests pass</li>
-          </ul>
-          <p class="muted">Approving accepts this output. Merging into main still asks you, and nothing is pushed.</p>
-          <div class="btns">
-            <span class="btn danger">Reject</span>
-            <span class="btn">Send back…</span>
-            <span class="btn primary">Approve</span>
-          </div>
-        </div>
-      </div>
-
-      <!--
-        Screenshot and video slot. Real screenshots arrive with the first release.
-        Put the files in screens/ and uncomment, for example:
-
+      <div class="gallery">
         <figure class="shot">
           <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="screens/channel-dark.png">
-            <img src="screens/channel-light.png" width="1440" height="900" loading="lazy"
-                 alt="A mission channel: what waits on you pinned at the top, then one thread per work item">
+            <source media="(prefers-color-scheme: dark)" srcset="screens/home-map-dark.png">
+            <img src="screens/home-map-light.png" width="1440" height="900" loading="lazy" decoding="async"
+               alt="The Home map: you at the centre, eleven projects around you, and amber counts on the projects whose missions have work waiting for you.">
           </picture>
-          <figcaption>A channel per mission, where roles report in the first person.</figcaption>
+          <figcaption><strong>Your projects, and what waits on you</strong>The map shows every project around you; amber counts mark the work that needs your call.</figcaption>
         </figure>
-
-        <video src="screens/demo.webm" poster="screens/demo-poster.png" controls muted playsinline
-               preload="none" width="1440" height="900">A short walk through missionrun.</video>
-        A video also needs media-src 'self' added to the Content-Security-Policy in <head>.
-      -->
-      <p class="note">These cards are illustrations drawn for this page in the app's colours. Real screenshots arrive with the first release.</p>
+        <figure class="shot">
+          <img src="screens/channel-conversation-light.png" width="1440" height="900" loading="lazy" decoding="async"
+               alt="A mission channel, #keep-a-learning-resource-current. A pinned box lists 5 items waiting on you; below, a thread where the Researcher queued a work item and two cards ask you to open a drafted GitHub issue and to review a change with 2 files not yet committed.">
+          <figcaption><strong>One channel per mission</strong>Roles report in the first person. What waits on you stays pinned at the top.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="screens/sheet-decide-light.png" width="1440" height="900" loading="lazy" decoding="async"
+               alt="A decision sheet: the Researcher needs your approval on a research brief about model-context limits. It summarises what was checked, says the Content Editor starts next if you approve, and offers Reject, Send back to the Researcher and Approve.">
+          <figcaption><strong>Decide in one place</strong>Each decision opens in words: what was checked, and what happens when you approve.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="screens/merge-calm-light.png" width="1440" height="900" loading="lazy" decoding="async"
+               alt="A Ready to merge card from the Content Editor: one commit changing two documentation files, a note that lint and MkDocs were not run, and the line Merges into main on this Mac, nothing is pushed, beside Reject, Send back and Merge into main.">
+          <figcaption><strong>Ready to merge</strong>The change, what was not checked, and where it lands, before you press anything.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="screens/autonomy-switches-light.png" width="1440" height="900" loading="lazy" decoding="async"
+               alt="The mission's Autonomy panel: changes merge into main locally, and three switches, Approve outputs, Merge into your branch and Push to origin, are each set to Ask me, with a track record such as 7 of 10 approved without edits.">
+          <figcaption><strong>Autonomy, one action at a time</strong>Approve outputs, merge and push each have their own switch, with the track record beside it.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="screens/stepper-review-light.png" width="1440" height="900" loading="lazy" decoding="async"
+               alt="The last step of the New project wizard: a review of the mission Keep a learning resource current, listing how work arrives every Monday at 9:00, the autonomy level, a team of Researcher on Codex CLI, Content Editor on Claude Code and Document Editor on Gemini CLI, and the buttons Start now and Start Mon 09:00.">
+          <figcaption><strong>Set up a mission in a few steps</strong>Seven short steps, then a plain review of what will run, when, and with which agents.</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -634,7 +619,7 @@
 
 <footer class="bottom">
   <div class="wrap">
-    <span><span class="mark" aria-hidden="true">m</span>© 2026 missionrun</span>
+    <span><img class="mark" src="favicon.svg" width="22" height="22" alt="">© 2026 missionrun</span>
     <span>Coming soon · open source, Apache-2.0</span>
   </div>
 </footer>
