@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>missionrun: delegate your backlog to a crew of coding agents, behind gates you control</title>
 <meta name="description" content="missionrun runs Claude Code, Codex CLI and Gemini CLI on your Mac as a crew that works your backlog in missions, each agent in its own sandbox, and asks before anything reaches your branches or other people. Coming soon, open source under Apache-2.0.">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-64.png" type="image/png" sizes="64x64">
@@ -177,6 +177,9 @@
   .hero .shot img { border-radius: var(--radius-xl); box-shadow: 0 18px 50px rgb(0 0 0 / 16%); }
   .shot figcaption { margin-top: 10px; font-size: 15px; color: var(--text-muted); }
   .shot figcaption strong { display:block; color: var(--text); font-size: 16px; }
+  .demo { margin: 8px 0 40px; }
+  .demo video { display:block; width:100%; height:auto; border-radius:12px; border:1px solid var(--line, #e6ddd2); background:#000; }
+  .demo figcaption { margin-top:10px; color: var(--muted, #6f665d); font-size:15px; }
   .gallery { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
   .how-flow { margin-top: 32px; max-width: 760px; }
   .how-flow h3 { font-size: 20px; }
@@ -422,6 +425,14 @@
       <span class="eyebrow">A look inside</span>
       <h2 id="look-h">One channel per mission, one place to decide</h2>
       <p class="lede">Roles report in the first person in their mission's channel. What waits on you is pinned at the top, and every decision opens in words.</p>
+
+      <figure class="demo">
+        <video controls muted playsinline preload="metadata" poster="screens/demo-poster.png" width="1280" height="800"
+               aria-describedby="demo-cap">
+          <source src="screens/demo.webm" type="video/webm">
+        </video>
+        <figcaption id="demo-cap">A 27-second walk-through: the map shows what waits, a work item opens, it's approved, the channel follows the crew, and the finished item lands. Press play.</figcaption>
+      </figure>
 
       <div class="gallery">
         <figure class="shot">
