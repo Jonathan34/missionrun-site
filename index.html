@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>missionrun — coming soon</title>
+<meta name="description" content="Delegate your backlog to a crew of AI coding agents, behind gates you control. Coming soon.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
+<style>
+  :root { color-scheme: light dark; --bg:#f6f1ea; --fg:#2b2723; --muted:#6f665d; --accent:#0f7b6c; --card:#fffaf4; --line:#e6ddd2; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1f1c19; --fg:#efe8df; --muted:#a89d91; --accent:#3cc3ae; --card:#2a2622; --line:#3a352f; } }
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--fg);
+         font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif; padding:24px; }
+  main { max-width: 560px; text-align:left; }
+  .mark { display:inline-grid; place-items:center; width:48px; height:48px; border-radius:12px; background:var(--accent);
+          color:var(--bg); font-weight:700; font-size:26px; margin-bottom:20px; }
+  h1 { font-size: 40px; line-height:1.1; margin:0 0 8px; letter-spacing:-0.02em; }
+  .tag { color:var(--muted); font-size:18px; margin:0 0 28px; }
+  ul { list-style:none; padding:0; margin:0 0 28px; border:1px solid var(--line); border-radius:12px; background:var(--card); }
+  li { padding:14px 18px; border-top:1px solid var(--line); }
+  li:first-child { border-top:0; }
+  li strong { display:block; }
+  li span { color:var(--muted); font-size:15px; }
+  .soon { display:inline-block; padding:6px 12px; border-radius:999px; border:1px solid var(--line); color:var(--muted); font-size:14px; }
+  footer { margin-top:32px; color:var(--muted); font-size:13px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="mark" aria-hidden="true">m</div>
+  <h1>missionrun</h1>
+  <p class="tag">Delegate your backlog to a crew of AI coding agents, behind gates you control.</p>
+  <ul>
+    <li><strong>Your agents, your machine</strong><span>Runs the coding-agent CLIs you already use, locally and sandboxed on macOS.</span></li>
+    <li><strong>Missions that keep going</strong><span>Long-lived missions pick up work, research it, and land it as pull requests.</span></li>
+    <li><strong>You decide what ships</strong><span>Every outward action asks you first, until you choose to let it run on its own.</span></li>
+  </ul>
+  <span class="soon">Coming soon · open source, Apache-2.0</span>
+  <footer>© 2026 missionrun</footer>
+</main>
+</body>
+</html>
